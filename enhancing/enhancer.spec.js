@@ -183,5 +183,51 @@ describe('Test Modules for Succeed, Fail, Repaire, and Get', () => {
       expect(fail(item)).toEqual(expected);
     })
   })
-  
+
+  describe('Testing for Get Module', () => {
+    it('Should return unmodified name if enhancement is 0', () => {
+      const item = {
+        name: "Robin Hood", 
+        durability: 45,
+        enhancement: 0
+      }
+
+      //Assert
+      expect(get(item)).toEqual(item);
+    })
+
+    it('Should return modified name with name after [] surrounding plus sign then enhancment level', () => {
+      const item = {
+        name: "Robin Hood", 
+        durability: 45,
+        enhancement: 2
+      }
+
+      //Arrange
+      const expected = {
+        name: "[+2] Robin Hood", 
+        durability: 45,
+        enhancement: 2
+      }
+
+      //Assert
+      expect(get(item)).toEqual(expected);
+    })
+
+    it('Should return null when passed an invalid object', () => {
+      const item = {
+        name: "Robin Hood", 
+        durability: 45,
+        magic: 15
+      }
+
+      //Assert
+      expect(get(1)).toBeNull();
+      expect(get('cat')).toBeNull();
+      expect(get(item)).toBeNull();
+      expect(get([])).toBeNull();
+    })
+
+  })
+
 });

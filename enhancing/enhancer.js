@@ -99,7 +99,32 @@ function repair(item) {
 }
 
 function get(item) {
-  return { ...item };
+  if(item && typeof item === 'object'){
+    const objectProperties = Object.getOwnPropertyNames(item);
+    const objectNames = ["name", "durability", "enhancement"];
+
+    if (areEqual(objectProperties, objectNames)) {
+
+      if(item.enhancement > 0) {
+        const newItem = {
+          name: item.name = `[+${item.enhancement}] ${item.name}`,
+          durability: item.durability,
+          enhancement: item.enhancement
+        }
+       return newItem
+      }
+      else {
+        return item;
+      }
+
+    }
+    else {
+      return null;
+    }
+  }
+  else {
+    return null;
+  }
 }
 
 
